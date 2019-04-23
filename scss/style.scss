@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #084C61
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1400px;
+  margin: 0 auto;
+  padding: 2em;
+
+  &__title {
+    font-size: 1.5em;
+    margin-bottom: 2rem;
+    color: #618D9A;
+  }
+
+  &__input {
+    display: flex;
+    margin-bottom: 2rem;
+
+    .input__form {
+      margin: 0 2rem 2rem;
+
+      .label-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .header-input {
+          margin: 1rem 0;
+          text-align: center;
+          height: 2em;
+          width: 40em;
+          background-color: rgb(203, 215, 221);
+          outline: none;
+        }
+
+        .btn-s {
+          width: 5rem;
+          height: 2em;
+          font-size: 1em;
+          border: none;
+          background-color: #DE5F5A;
+          font-weight: bold;
+          transition: .3s;
+
+          &:hover {
+            background-color: #B4423D;
+          }
+        }
+      }
+    }
+  }
+
+  &__tasks {
+    color: #618D9A;
+    font-size: 1.5em;
+    margin-bottom: 2rem;
+  }
+
+  &__stats {
+    display: flex;
+
+    .list-stats {
+      margin: 0 2rem;
+    }
+  }
+
+
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #4F6D7A;
+  flex-grow: 1;
+  width: 1400px;
+  margin: 0 auto 2rem;
+
+
+  &__title {
+    padding: 1em;
+  }
+
+  &__container {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  &__tasks {
+    li {
+      margin-bottom: 1em;
+      font-size: 1em;
+      color: rgb(220, 234, 238);
+      font-weight: bold;
+    }
+
+    .delete-btn {
+      padding: 0.2em;
+      font-size: 1em;
+      border: none;
+      outline: none;
+      background-color: #DE5F5A;
+      font-weight: bold;
+      transition: .3s;
+
+      &:hover {
+        background-color: #B4423D;
+      }
+    }
+  }
+}
+
+.footer-info {
+  height: 40px;
+  background-color: #052731;
+  text-align: center;
+
+  .copyright {
+    display: block;
+    transform: translateY(50%);
+    color: #618D9A;
+  }
+}
