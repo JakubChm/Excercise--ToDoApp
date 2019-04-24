@@ -1,13 +1,14 @@
 const addInput = document.getElementById('add-field');
 const searchInput = document.getElementById('search-field');
 const addBtn = document.querySelector('.add-button');
-const searchBtn = document.querySelector('.search-button');
+// const searchBtn = document.querySelector('.search-button');
 const ul = document.querySelector('.todo-list__tasks');
 const numberOfTasks = document.querySelector('.tasks-number');
 const completedTasts = document.querySelector('.doneTask-Number');
 const notCompletedTasts = document.querySelector('.toCompleteTask-Number');
 
 const todoList = [];
+let filteredTodoList;
 // Add
 const createTodoElement = () => {
   const liElement = document.createElement('li');
@@ -20,9 +21,7 @@ const createTodoElement = () => {
   liElement.appendChild(deleteBtn)
   todoList.push(liElement)
 }
-const addError = () => {
-  if (addInput.value === "") return alert('You can\'t add an empty string to your TODO list. Please try one more time.');
-}
+
 const updateList = () => {
   ul.textContent = "";
   todoList.forEach((todoElement, id) => {
@@ -36,37 +35,34 @@ const setTaskNumber = () => {
 }
 //Remove
 const removeTask = (e) => {
-  e.target.parentNode.remove();
   const index = e.target.parentNode.dataset.id;
   todoList.splice(index, 1);
+  console.log(index);
   updateList();
+  searchTask();
 }
-// Search
-const searchError = () => {
-  if (searchInput.value === "") return alert('You can\'t search nothing lol. Please try one more time.');
-  if (todoList.length === 0) return alert('You can\'t search on empty list. Please try one more time.');
-  console.log('weszło');
-}
-
-
-
-
-
-
-
+// main add function
 const addTask = (e) => {
   e.preventDefault();
-  addError();
+  if (addInput.value === "") return alert('You can\'t add an empty string to your TODO list. Please try one more time.');
   createTodoElement();
   updateList();
   addInput.value = "";
   document.querySelectorAll('.delete-btn').forEach(btnElement => btnElement.addEventListener('click', removeTask));
+  searchTask();
+}
+// Search
+const updateFilteredList = () => {
+  ul.textContent = "";
+  filteredTodoList.forEach((todoElement) => {
+    ul.appendChild(todoElement)
+  });
+}
+//  main search function
+const searchTask = () => {
+  filteredTodoList = todoList.filter(todoTask => todoTask.textContent.toLowerCase().includes(searchInput.value.toLowerCase()));
+  updateFilteredList();
 }
 
-const searchTask = (e) => {
-  e.preventDefault();
-  searchError();
-
-}
 addBtn.addEventListener('click', addTask)
-searchBtn.addEventListener('click', searchTask)
+searchInput.addEventListener('input', searchTask)
