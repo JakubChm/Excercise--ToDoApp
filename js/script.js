@@ -14,18 +14,15 @@ let movedElementTextContent;
 let filteredTodoList;
 let filteredDoneList;
 
-
 const createElementComponent = (pContent, doneBtn, doneBtnTextContent, deleteBtn, deleteBtnTextContent) => {
-  return `<p class="li-content">${pContent}</p><div class="btn-container"><button class="todo-btn ${doneBtn}-btn">${doneBtnTextContent}</button><button class="todo-btn ${deleteBtn}-btn">${deleteBtnTextContent}</button></div>`;
+  return `<p class="li-content m-0 mx-2 d-flex align-items-center">${pContent}</p><div class="btn-container d-flex flex-nowrap"><button class="todo-btn btn ${doneBtn}-btn mr-1 shadow">${doneBtnTextContent}</button><button class="todo-btn btn ${deleteBtn}-btn shadow">${deleteBtnTextContent}</button></div>`;
 };
-
 // Add //////////////////////////////
-
 const createTodoElement = (textContent) => {
   const liElement = document.createElement('li');
-  liElement.className = "task";
+  liElement.className = "task list-group-item d-flex justify-content-between align items-center flex-grow-1 m-2 p-2 rounded shadow";
   ulToDo.appendChild(liElement);
-  const addComponent = createElementComponent(textContent, "done", "Done", "delete", "Delete");
+  const addComponent = createElementComponent(textContent, "btn-success done", "Done", "btn-danger delete", "Delete");
   liElement.innerHTML = addComponent;
   todoList.push(liElement);
 };
@@ -36,16 +33,14 @@ const createDoneElement = (e) => {
   console.log(movedElementTextContent);
   todoList.splice(index, 1);
   const liDoneElement = document.createElement('li');
-  liDoneElement.className = "task";
+  liDoneElement.className = "task list-group-item d-flex justify-content-between align items-center flex-grow-1 m-2 p-2 rounded shadow";
   ulDone.appendChild(liDoneElement);
-  const addComponent = createElementComponent(movedElementTextContent, "not-done", "Not done", "delete-done", "Delete");
+  const addComponent = createElementComponent(movedElementTextContent, "btn-danger not-done", "Not done", "btn-danger delete-done", "Delete");
   liDoneElement.innerHTML = addComponent;
   doneList.push(liDoneElement);
-  // updateDoneList();
-  // updateList();
   updateList(todoList, ulToDo);
   updateList(doneList, ulDone);
-  searchTask();
+  searchTask(e);
   document.querySelectorAll('.delete-done-btn').forEach(btnElement => btnElement.addEventListener('click', removeDoneTask));
   document.querySelectorAll('.not-done-btn').forEach(btnElement => btnElement.addEventListener('click', moveToTodoList));
 };
@@ -54,30 +49,14 @@ const moveToTodoList = (e) => {
   const index = e.target.parentNode.parentNode.dataset.id;
   movedElementTextContent = doneList[index].querySelector('p').textContent;
   doneList.splice(index, 1);
-  createTodoElement(movedElementTextContent)
+  createTodoElement(movedElementTextContent);
   updateList(todoList, ulToDo);
   updateList(doneList, ulDone);
-  searchTask();
+  searchTask(e);
   document.querySelectorAll('.delete-btn').forEach(btnElement => btnElement.addEventListener('click', removeTask));
   document.querySelectorAll('.done-btn').forEach(btnElement => btnElement.addEventListener('click', createDoneElement));
-}
-// update done and todo list //////////////////////////////
-// const updateList = () => {
-//   ulToDo.textContent = "";
-//   todoList.forEach((todoElement, id) => {
-//     ulToDo.appendChild(todoElement);
-//     todoElement.dataset.id = id;
-//   });
-//   setTaskNumber();
-// };
+};
 
-// const updateDoneList = () => {
-//   ulDone.textContent = "";
-//   doneList.forEach((todoElement, id) => {
-//     ulDone.appendChild(todoElement);
-//     todoElement.dataset.id = id;
-//   });
-// };
 const updateList = (setList, setUl) => {
   setUl.textContent = "";
   setList.forEach((listElement, id) => {
@@ -103,7 +82,7 @@ const removeTask = (e) => {
   todoList.splice(index, 1);
   updateList(todoList, ulToDo);
   setTaskNumber();
-  searchTask();
+  searchTask(e);
 };
 
 const removeDoneTask = (e) => {
@@ -111,22 +90,26 @@ const removeDoneTask = (e) => {
   doneList.splice(index, 1);
   updateList(doneList, ulDone);
   setTaskNumber();
-  searchTask();
+  searchTask(e);
 };
 
 // Main add function //////////////////////////////
 const addTask = (e) => {
   e.preventDefault();
-  if (addInput.value === "") return alert('You can\'t add an empty string to your TODO list. Please try one more time.');
-  createTodoElement(addInput.value);
-  updateList(todoList, ulToDo);
-  searchTask();
-  addInput.value = "";
-  document.querySelectorAll('.delete-btn').forEach(btnElement => btnElement.addEventListener('click', removeTask));
-  document.querySelectorAll('.done-btn').forEach(btnElement => btnElement.addEventListener('click', createDoneElement));
+  if (addInput.value === "") {
+    $('#exampleModalCenter').modal('show');
+  } else {
+    createTodoElement(addInput.value);
+    updateList(todoList, ulToDo);
+    searchTask(e);
+    addInput.value = "";
+    document.querySelectorAll('.delete-btn').forEach(btnElement => btnElement.addEventListener('click', removeTask));
+    document.querySelectorAll('.done-btn').forEach(btnElement => btnElement.addEventListener('click', createDoneElement));
+  }
 };
 // Main search function //////////////////////////////
-const searchTask = () => {
+const searchTask = (e) => {
+  e.preventDefault();
   filteredTodoList = todoList.filter(todoTask => todoTask.textContent.toLowerCase().includes(searchInput.value.toLowerCase()));
   filteredDoneList = doneList.filter(task => task.textContent.toLowerCase().includes(searchInput.value.toLowerCase()));
   updateFilteredList();
