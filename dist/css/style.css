@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #6C747D; }
 
 .wrapper {
@@ -15,7 +15,7 @@
   font-family: 'Lobster'; }
 
 .header-input {
-  background-color: #FBF6F4; }
+  background-color: #FCFAF8; }
 
 .btn-s {
   color: #FBF6F4; }
