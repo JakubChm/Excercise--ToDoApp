@@ -56,7 +56,7 @@ const moveToTodoList = (e) => {
   document.querySelectorAll('.delete-btn').forEach(btnElement => btnElement.addEventListener('click', removeTask));
   document.querySelectorAll('.done-btn').forEach(btnElement => btnElement.addEventListener('click', createDoneElement));
 };
-
+// Update lists //////////////////////////
 const updateList = (setList, setUl) => {
   setUl.textContent = "";
   setList.forEach((listElement, id) => {
