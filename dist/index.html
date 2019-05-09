@@ -3,63 +3,99 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TODO App by Jakub Chmura</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Source+Sans+Pro:400,700&amp;subset=latin-ext"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <div class="wrapper">
-    <header class="header">
-      <div class="header__title">
-        <h1>ToDo list - Excercise</h1>
+  <div class="wrapper d-flex flex-column justify-content-between">
+    <header class="header d-flex-column justify-content-between">
+      <div class="header__title nav justify-content-center p-3 shadow">
+        <h1 class="header__title__h1 text-center nav-item font-weight-bold mx-auto">ToDo list</h1>
       </div>
-      <div class="header__inputs">
-        <form class="form add-field">
+      <div
+        class="header__inputs container form-group d-flex flex-wrap justify-content-center justify-content-md-between mt-4">
+        <form class="form add-field px-3 d-flex flex-column flex-grow-1">
           <label class="label-field" for="add-field">
-            <input class="header-input" type="text" id="add-field" placeholder="Add task to TODO list" required><button
-              class="btn-s add-button" type="submit">Add</button></label>
-        </form>
-        <form class="form search-field">
-          <label class="label-field" for="search-field">
-            <input class="header-input" type="text" id="search-field" placeholder="Search into yor TODO list" required>
-            <!-- <button class="btn-s search-button" type="submit">Search</button> -->
+            Enter your task.
           </label>
+          <input class="header-input form-control shadow" type="text" id="add-field" placeholder="Your task" required>
+          <div class="py-3">
+            <button class="btn-s add-button btn btn-success shadow" type="submit" data-toggle="popover" title="HEY!"
+              data-content="You can't add an empty string to your TODO list. Please try one more time.">
+              Add your task
+            </button>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">
+                      Empty string.
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    You can't add an empty string to your TODO list. Please try one more time.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form class="form search-field px-3 d-flex flex-column flex-grow-1">
+          <label class="label-field" for="search-field">Search task.</label>
+          <input class="header-input form-control shadow" type="text" id="search-field"
+            placeholder="Search into yor TODO list" required>
         </form>
       </div>
-      <div class="header__tasks">
+      <div class="header__task container text-center">
         <h2>Number of tasks: <span class="tasks-number">0</span></h2>
       </div>
-      <div class="header__stats">
+      <div class="header__stats container d-flex flex-wrap justify-content-around">
         <h3 class="list-stats">Tasks to complete: <span class="toCompleteTask-Number">0</span></h3>
         <h3 class="list-stats">Tasks completed: <span class="doneTask-Number">0</span></h3>
       </div>
     </header>
-
-    <main class="todo-list">
-      <h3 class="todo-list__title">Your ToDo list:</h3>
-      <h3 class="todo-list__title">Done tasks from list:</h3>
-      <div class="todo-list__section">
-        <ul class="todo-list__tasks"></ul>
+    <main class="todo-list container d-flex flex-md-wrap justify-content-between flex-grow-1">
+      <div class="todo-list-wrapper container d-flex flex-column mr-2 w-50 1 rounded-lg shadow">
+        <h3 class=" todo-list__title text-center pt-2">ToDo list:</h3>
+        <div class="todo-list__section d-flex flex-column w-100 mb-3 flex-grow-1 rounded shadow">
+          <ul class="todo-list__tasks w-100"></ul>
+        </div>
       </div>
-      <div class="todo-list__section">
-        <ul class="todo-list__tasks-done"></ul>
+      <div class="todo-list-wrapper container d-flex flex-column ml-2 w-50 1 rounded-lg shadow">
+        <h3 class=" todo-list__title text-center pt-2">Done tasks:</h3>
+        <div class="todo-list__section d-flex flex-column w-100 mb-3 flex-grow-1 rounded-lg shadow">
+          <ul class="todo-list__tasks-done w-100"></ul>
+        </div>
       </div>
     </main>
-
-    <footer class="footer-info">
-      <p class="copyright">&copy; Jakub Chmura 2019.</p>
+    <footer class="footer-info m-0 pt-2 pb-2 mt-4">
+      <p class="copyright text-center m-0 ">&copy; Jakub Chmura 2019.</p>
     </footer>
-
-
-
-
-
-
   </div>
-  <script src="/js/script.js">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
