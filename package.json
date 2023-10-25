@@ -23,7 +23,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "node-sass": "^4.11.0",
     "readable-stream": "^3.3.0"
   }
